@@ -1,5 +1,4 @@
 import speech_recognition as sr
-from VoiceAssistant.objects.transcription import Transcription
 mic = sr.Microphone()
 r = sr.Recognizer()
 

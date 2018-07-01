@@ -10,15 +10,16 @@ class ProcessingEngine(object):
             setattr(self, key, rules[key])
         self.fallback = fallback
     
-    def registerRule(self, rule):
+    def registerRule(self, activator, rule):
         if isinstance(rule, Rule):
-            setattr(self, rule.getActivator(), rule)
+            setattr(self, activator, rule)
         else:
             raise RuleException('Cannot register provided rule.')
 
     def lookupRule(self, text):
         print(text)
         try:
-            getattr(self, text)
+            getattr(self, text).run()
+        
         except Exception:
             self.fallback()
