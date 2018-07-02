@@ -1,8 +1,5 @@
 from VoiceAssistant.objects.rule import Rule
-
-class RuleException(Exception):
-    def __init__(self, message):
-        self.message = message
+from VoiceAssistant.Exceptions.Rule import RuleException
 
 class ProcessingEngine(object):
     def __init__(self, rules, fallback):
