@@ -1,4 +1,4 @@
-import pyttsx
+import pyttsx3 as pyttsx
 
 class SpeechEngine:
 

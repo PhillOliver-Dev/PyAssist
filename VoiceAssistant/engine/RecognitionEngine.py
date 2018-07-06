@@ -1,20 +1,15 @@
 import speech_recognition as sr
-mic = sr.Microphone()
-r = sr.Recognizer()
-
-with mic as source:
-    audio = r.listen(source)
-    try:
-        r.recognize_google(audio)
-    except Exception as e:
-        print(e)
+from VoiceAssistant.engine.ProcessingEngine import ProcessingEngine
 
 class RecognitionEngine:
 
-    def __init__(self, procEngine):
+    def __init__(self, procEngine=None):
         self.microphone = sr.Microphone()
         self.recogniser = sr.Recognizer()
-        self.procEngine = procEngine
+        if procEngine:
+            self.procEngine = procEngine
+        else:
+            self.procEngine = ProcessingEngine()
         self.status = True
     
     def run(self):
@@ -31,7 +26,7 @@ class RecognitionEngine:
             
             try:
                 text = (self.recogniser.recognize_google(audio))
-                self.procEngine.lookupRule(text)
-            except (sr.RequestError, sr.UnknownValueError) as e:
-                print(e)
+                self.procEngine.process_command(text)
+            except (sr.RequestError, sr.UnknownValueError):
+                pass
 

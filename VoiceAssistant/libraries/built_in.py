@@ -1,10 +1,12 @@
 from _version import __version__ as version
 from VoiceAssistant.objects.rule import Rule
 
-class BuiltInRules(dict):
+class BuiltInRules:
 
     def __init__(self):
-        self.__setitem__('print version', Rule(self.printVersion))
+        self.rules = []
+        self.rules.append(Rule('print version', self.print_version, 'Printing Version'))
 
-    def printVersion(self):
+    @staticmethod
+    def print_version():
         print(version)
